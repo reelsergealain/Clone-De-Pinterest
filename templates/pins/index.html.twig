@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PinsController!{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1 class="text-muted py-3">Il y'a {{pluralize(pins|length, 'pin')}}</h1>
+
+        {% for pin in pins %}
+            <article>
+                <h1>{{pin.title}}</h1>
+                    <p>{{pin.description}}</p>
+            </article>
+        {% endfor %}
+
+    </div>
+{% endblock %}
