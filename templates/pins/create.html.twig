@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title pin.title %}
+
+{% block body %}
+  <div class="container mt-3">
+    <h2 class="text-center my-4">Creating pin</h2>
+    <div class="col-md-6 mx-auto">
+      {{ form_start(form) }}
+      {{ form_widget(form) }}
+      <button class="btn btn-primary" type="submit">Create pin</button>
+      {{ form_end(form) }}
+    </div>
+  </div>
+{% endblock %}

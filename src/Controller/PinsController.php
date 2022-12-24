@@ -35,14 +35,41 @@ class PinsController extends AbstractController
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
-            $pinRepository->save($pin);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pinRepository->save($pin, true);
             return $this->redirectToRoute('pins.index');
         }
 
-        return $this->render('pins/show.html.twig', [
+        return $this->renderForm('pins/create.html.twig', [
             'pin' => $pin,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/pins/{id<\d+>}/edit', name: 'pins.edit')]
+    public function edit(Pin $pin, PinRepository $pinRepository, Request $request): Response
+    {
+        $form = $this->createForm(PinType::class, $pin);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pinRepository->save($pin, true);
+            return $this->redirectToRoute('pins.index');
+        }
+
+        return $this->renderForm('pins/edit.html.twig', [
+            'pin' => $pin,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/pins/{id<\d+>}/delete', name: 'pins.delete')]
+    public function delete(Pin $pin, PinRepository $pinRepository, Request $request): Response
+    {
+
+        return $this->renderForm('pins/edit.html.twig', [
+            
         ]);
     }
 }
