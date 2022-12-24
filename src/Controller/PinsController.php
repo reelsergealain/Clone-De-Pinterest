@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Form\PinType;
 use App\Repository\PinRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,6 +23,23 @@ class PinsController extends AbstractController
     #[Route('/pins/{id<\d+>}', name: 'pins.show')]
     public function show(Pin $pin): Response
     {
+
+        return $this->render('pins/show.html.twig', [
+            'pin' => $pin,
+        ]);
+    }
+
+    #[Route('/pins/create', name: 'pins.create')]
+    public function create(PinRepository $pinRepository, Request $request): Response
+    {
+        $pin = new Pin;
+        $form = $this->createForm(PinType::class, $pin);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $pinRepository->save($pin);
+            return $this->redirectToRoute('pins.index');
+        }
 
         return $this->render('pins/show.html.twig', [
             'pin' => $pin,
