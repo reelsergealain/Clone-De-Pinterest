@@ -9,7 +9,11 @@
                 <p>{{pin.description}}</p>
         </article>
         <a class="btn btn-primary" href=" {{path('pins.edit', {id:pin.id})}} ">Edit</a>
-        <a class="btn btn-danger" href=" {{path('pins.delete', {id:pin.id})}} ">Delete</a>
+        <form class="d-inline-block" method="post" action="{{ path('pins.delete', {'id': pin.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pin.id) }}">
+            <button class="btn btn-danger">Delete</button>
+        </form>
+
 
 
     </div>

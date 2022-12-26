@@ -64,12 +64,12 @@ class PinsController extends AbstractController
         ]);
     }
 
-    #[Route('/pins/{id<\d+>}/delete', name: 'pins.delete')]
+    #[Route('/pins/{id<\d+>}/delete', name: 'pins.delete',  methods: ['POST'])]
     public function delete(Pin $pin, PinRepository $pinRepository, Request $request): Response
     {
-
-        return $this->renderForm('pins/edit.html.twig', [
-            
-        ]);
+        if ($this->isCsrfTokenValid('delete'.$pin->getId(), $request->request->get('_token'))) {
+            $pinRepository->remove($pin, true);
+            return $this->redirectToRoute('pins.index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 }
