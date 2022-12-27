@@ -55,6 +55,10 @@ class PinsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pinRepository->save($pin, true);
+            $this->addFlash(
+               'success',
+               'Pin editer avec success'
+            );
             return $this->redirectToRoute('pins.index');
         }
 
@@ -69,6 +73,10 @@ class PinsController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$pin->getId(), $request->request->get('_token'))) {
             $pinRepository->remove($pin, true);
+            $this->addFlash(
+               'info',
+               'Pins Delete'
+            );
             return $this->redirectToRoute('pins.index', [], Response::HTTP_SEE_OTHER);
         }
     }
