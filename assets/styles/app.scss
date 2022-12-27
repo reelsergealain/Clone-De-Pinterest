@@ -3,3 +3,13 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+.vich-image .form-check {
+    @extend .mt-3;
+}
+.vich-image img {
+    @extend .mb-2;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail;
+}
