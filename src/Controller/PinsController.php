@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +31,15 @@ class PinsController extends AbstractController
     }
 
     #[Route('/pins/create', name: 'pins.create')]
-    public function create(PinRepository $pinRepository, Request $request): Response
+    public function create(PinRepository $pinRepository, Request $request, UserRepository $userRepository): Response
     {
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $serge = $userRepository->findOneBy(['email' => 'reelsergealain@gmail.com']);
+            $pin->setUser($serge);
             $pinRepository->save($pin, true);
             return $this->redirectToRoute('pins.index');
         }
