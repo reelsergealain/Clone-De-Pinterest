@@ -16,12 +16,12 @@
                         <div class="mw-100 overflow-hidden">
 							<a href="{{ path('pins.show', {id: pin.id } ) }}"><img class="w-100 rounded-top" src=" {{ (pin.imageName ? vich_uploader_asset(pin) : asset('image/placeholder.png'))| imagine_filter('squared_thumbnail_medium') }} " alt="{{pin.title}}"></a>
                         </div>
-							<h3>
-								<a class="text-dark" href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a>
-							</h3>
-							<p>{{pin.description|u.truncate(10, '...', false)}}</p>
-							<p>Créer par [Serge Alain] |
-								{{pin.createdAt|ago}}</p>
+							<h2 class="h5 pb-3 mt-3 text-center">
+								<a class="text-dark text-muted text-decoration-none" href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a>
+							</h2>
+							<p class="pl-3">{{pin.description|u.truncate(30, '...', false)}}</p>
+							<p class="text-muted pl-3 pb-3">Créer par <strong>Serge Alain</strong> ✨
+								<small>{{pin.createdAt|ago}}</small></p>
 						</article>
 					</div>
 				{% endfor %}
