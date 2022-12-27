@@ -37,6 +37,7 @@ class Pin
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[Vich\UploadableField(mapping: 'pin_image', fileNameProperty: 'imageName')]
+    #[Assert\Image(maxSize:"1M")]
     private ?File $imageFile = null;
     #[ORM\Column(length: 255, nullable: true)]
 

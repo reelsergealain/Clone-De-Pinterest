@@ -29,3 +29,7 @@ yarn-error.log
 ###> Image ###
 /public/uploads/
 ###< symfony/phpunit-bridge ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
