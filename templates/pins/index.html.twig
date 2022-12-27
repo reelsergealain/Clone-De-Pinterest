@@ -1,17 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PinsController!{% endblock %}
+{% block title %}Hello PinsController!
+{% endblock %}
 
 {% block body %}
-    <div class="container mt-3">
-        <h1 class="text-muted py-3">Il y'a {{pluralize(pins|length, 'pin')}}</h1>
+	<div class="container mt-3">
+		<h1 class="text-muted text-center py-3">Il y'a
+			{{pluralize(pins|length, 'pin')}}</h1>
 
-        {% for pin in pins %}
-            <article>
-                <h1><a href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a></h1>
-                    <p>{{pin.description}}</p>
-            </article>
-        {% endfor %}
+		{% for row in pins|batch(3) %}
+			<div class="row mb-5">
+				{% for pin in row %}
+					<div class="col-md-4">
+						<article class="pin bg-white rounded shadow">
+                        <div class="mw-100 overflow-hidden">
+							<a href="{{ path('pins.show', {id: pin.id } ) }}"><img class="w-100 rounded-top" src=" {{ (pin.imageName ? vich_uploader_asset(pin) : asset('image/placeholder.png'))| imagine_filter('squared_thumbnail_medium') }} " alt="{{pin.title}}"></a>
+                        </div>
+							<h3>
+								<a class="text-dark" href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a>
+							</h3>
+							<p>{{pin.description|u.truncate(10, '...', false)}}</p>
+							<p>Créer par [Serge Alain] |
+								{{pin.createdAt|ago}}</p>
+						</article>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
 
-    </div>
+	</div>
 {% endblock %}
