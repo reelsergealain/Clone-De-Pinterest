@@ -5,12 +5,12 @@
 {% block body %}
 	<div class="container mt-3">
 		<div class="col-10 mx-auto">
-			<article class="pin bg-white rounded shadow">
+			<article class="pin rounded">
 				<div class=" overflow-hidden">
 					<a href="{{ path('pins.show', {id: pin.id } ) }}"><img class="w-100 h-100 rounded-top" src=" {{ (pin.imageName ? vich_uploader_asset(pin) : asset('image/placeholder.png')) }} " alt="{{pin.title}}"></a>
 				</div>
-				<h2 class="h5 pb-3 mt-3 text-center">
-					<a class="text-dark text-muted text-decoration-none" href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a>
+				<h2 class="h5 pb-3 mt-3 ">
+					{{pin.title}}
 				</h2>
 				<p class="pl-3 px-3">{{pin.description|nl2br}}</p>
 				<p class="text-muted pl-3 pb-3">Créer par

@@ -20,7 +20,7 @@
 								<a class="text-dark text-muted text-decoration-none" href=" {{ path('pins.show', {id: pin.id } ) }} ">{{pin.title}}</a>
 							</h2>
 							<p class="pl-3">{{pin.description|u.truncate(30, '...', false)}}</p>
-							<p class="text-muted pl-3 pb-3">Créer par <strong>Serge Alain</strong> ✨
+							<p class="text-muted pl-3 pb-3">Créer par <strong>{{pin.user.fullName}}</strong> ✨
 								<small>{{pin.createdAt|ago}}</small></p>
 						</article>
 					</div>
